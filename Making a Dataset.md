@@ -33,4 +33,11 @@ Aim to create paired dataset with UKIDSS and WISE image.
 
 ### 1.3. Constructing SQL Queries
 
+#### Required Characteristics8
+
 #### Matching Surveys with TargetID
+```SQL
+SELECT
+FROM AS U, allwise_sc AS W, 
+WHERE 
+```
