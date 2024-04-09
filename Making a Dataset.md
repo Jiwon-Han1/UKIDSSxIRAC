@@ -33,11 +33,18 @@ Aim to create paired dataset with UKIDSS and WISE image.
 
 ### 1.3. Constructing SQL Queries
 
-#### Required Characteristics8
+#### Main Table
+- **lasSourceXwise_allskysc**: <br/>
+Mainly used table, consisting of 2 columns <br/>
+    - *masterObjID*: The unique ID in lasSource (=sourceID)
+    - *slaveObjID*: The unique ID of the neighbour in WISE..wise_allskysc (=cntr)
+
+#### Required Characteristics
+- ObjID:
 
 #### Matching Surveys with TargetID
 ```SQL
-SELECT
-FROM AS U, allwise_sc AS W, 
+SELECT Main.masterObjID AS U_ObjID, slaveObjID AS W_ObjID
+FROM lasSourceXwise_allskysc AS Main, AS U, allwise_sc AS W, 
 WHERE 
 ```
