@@ -39,26 +39,41 @@ Aim to create paired dataset with UKIDSS and WISE image.
     - *slaveObjID*: The unique ID of the neighbour in WISE.wise_allskysc (=cntr)
 
 #### Merged Table & Primary Key
+- **lasPointSource**: (*or lasSource?*)<br/>
+    - **sourceID** (Primary Key) : <br/>
+        > UID (unique over entire WSA via programme ID prefix) of this merged detection as assigned by merge algorithm. <br/>
+    - **yAperMag3 ~ kAperMag3**: <br/>
+        > Default point source Y ~ K aperture corrected mag (2.0 arcsec aperture diameter)
+    - yAperMag3Err ~ kAperMag3Err: <br/>
+        > Error in default point source Y ~ K mag (2.0 arcsec aperture diameter) <br/>
 - **allwise_sc**: <br/>
     - **cntr** (Primary Key) : <br/>
         > Unique identification number for this object in the AllWISE Catalog/Reject Table.
     - source_id: <br/>
-        > Unique source ID, formed from a combination of the Atlas Tile ID, coadd_id, and sequential extracted source number, src. <br/>
-- **lasPointSource**: (*or ~~lasSource~~?*)<br/>
-    - **sourceID** (Primary Key) : <br/>
-        > UID (unique over entire WSA via programme ID prefix) of this merged detection as assigned by merge algorithm.
+        > Unique source ID, formed from a combination of the Atlas Tile ID, coadd_id, and sequential extracted source number, src.
+    - **w1mag ~ w4mag**: <br/> 
+        > "Standard" aperture magnitude of each filter. This column is null if an aperture measurement was not possible.
+    - w1sigm ~ w4sigm: <br/> 
+        > Uncertainty in the "standard" aperture magnitude of each filter.
+        > This column is null if the W1 "standard" aperture magnitude is an upper limit, or if an aperture measurement was not possible.
 
 #### Required Characteristics
 - Essential: ObjID, ra, dec, flux, etc.
 - Optional: x, y coord in frame
 
+#### Constraints (TBD)
+- Brightness:
+- Position & Nearby Source:
+
 #### Matching Surveys with TargetID
 ```SQL
-SELECT Main.masterObjID AS U_ObjID, slaveObjID AS W_ObjID
+SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec, W.ra, W.dec,
+       U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err, 
+       W.w1mag, W.w1sigm, W.w2mag, W.w2sigm, W.w3mag, W.w3sigm, W.w4mag, W.w4sigm,
   FROM lasSourceXwise_allskysc AS Main
   INNER JOIN lasPointSource AS U
   ON Main.masterObjID = U.sourceID
   INNER JOIN allwise_sc AS W
   ON Main.slaveObjID = W.cntr
-WHERE 
+WHERE ~~~~~~
 ```
