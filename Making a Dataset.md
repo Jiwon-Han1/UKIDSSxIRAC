@@ -11,7 +11,7 @@ Aim to create paired dataset with UKIDSS and WISE image.
 ### 1.2. Choose Table Candidates
 
 #### UKIDSS<br/>
-* **lasMergeLog**: <br/>
+* lasMergeLog: <br/>
   Contains frame set details of merged LAS MultiframeDetector images. <br/>
   *> WSA_UKIDSS/Tables/lasMergeLog*<br/><br/>
 * **lasSourceXwise_allskysc**: <br/>
@@ -20,11 +20,11 @@ Aim to create paired dataset with UKIDSS and WISE image.
 * **lasPointSource**: <br/>
   Merged, seamless point source catalogue derived from the UKIDSS LAS, highlighting the '*completeness*'. <br/>
   *> WSA_UKIDSS/Tables/lasPointSource*<br/><br/>
-* **reliableLasPointSource**:<br/>
+* reliableLasPointSource:<br/>
   Reliable, but incomplete, point source catalogue derived from UKIDSS LAS, highlighting the '*reliability*'. <br/>
   *> WSA_UKIDSS/Tables/reliableLasPointSource*<br/><br/>
 #### WISE<br/>
-* **allwise_sc**: <br/>
+* allwise_sc: <br/>
   Contains the parameters provided for each source in the AllWISE source catalogue. (DR 2013)<br/>
   *> WISE/Tables/allwise_sc* <br/><br/>
 * **wise_allskysc**: <br/>
@@ -46,16 +46,17 @@ Aim to create paired dataset with UKIDSS and WISE image.
         > Default point source Y ~ K aperture corrected mag (2.0 arcsec aperture diameter)
     - yAperMag3Err ~ kAperMag3Err: <br/>
         > Error in default point source Y ~ K mag (2.0 arcsec aperture diameter) <br/>
-- **allwise_sc**: <br/>
+- **wise_allskysc**: (*or allwise_sc?*) <br/>
     - **cntr** (Primary Key) : <br/>
         > Unique identification number for this object in the AllWISE Catalog/Reject Table.
     - source_id: <br/>
         > Unique source ID, formed from a combination of the Atlas Tile ID, coadd_id, and sequential extracted source number, src.
     - **w1mag ~ w4mag**: <br/> 
-        > "Standard" aperture magnitude of each filter. This column is null if an aperture measurement was not possible.
+        > "Standard" aperture magnitude for each filter; W1 ~ W4.
+        > In *allwise_sc*, this column is null if an aperture measurement was not possible.
     - w1sigm ~ w4sigm: <br/> 
-        > Uncertainty in the "standard" aperture magnitude of each filter.
-        > This column is null if the W1 "standard" aperture magnitude is an upper limit, or if an aperture measurement was not possible.
+        > Uncertainty in the "standard" aperture magnitude for each filter; W1 ~ W4.
+        > In *allwise_sc*, this column is null if the "standard" aperture magnitude is an upper limit, or if an aperture measurement was not possible.
 
 #### Required Characteristics
 - Essential: ObjID, ra, dec, flux, etc.
@@ -67,13 +68,13 @@ Aim to create paired dataset with UKIDSS and WISE image.
 
 #### Matching Surveys with TargetID
 ```SQL
-SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec, W.ra, W.dec,
+SELECT TOP 50 Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec, W.ra, W.dec,
        U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err, 
-       W.w1mag, W.w1sigm, W.w2mag, W.w2sigm, W.w3mag, W.w3sigm, W.w4mag, W.w4sigm,
+       W.w1mag, W.w1sigm, W.w2mag, W.w2sigm, W.w3mag, W.w3sigm, W.w4mag, W.w4sigm
   FROM lasSourceXwise_allskysc AS Main
   INNER JOIN lasPointSource AS U
   ON Main.masterObjID = U.sourceID
-  INNER JOIN allwise_sc AS W
+  INNER JOIN wise_allskysc AS W
   ON Main.slaveObjID = W.cntr
 WHERE ~~~~~~
 ```
