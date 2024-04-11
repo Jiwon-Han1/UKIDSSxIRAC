@@ -40,24 +40,24 @@ Aim to create paired dataset with UKIDSS and WISE image.
 
 #### Merged Table & Primary Key
 - **allwise_sc**: <br/>
-    - *cntr* (PK): <br/>
+    - **cntr** (Primary Key) : <br/>
         > Unique identification number for this object in the AllWISE Catalog/Reject Table.
     - source_id: <br/>
-        > Unique source ID, formed from a combination of the Atlas Tile ID, coadd_id, and sequential extracted source number, src.
-<br/>
+        > Unique source ID, formed from a combination of the Atlas Tile ID, coadd_id, and sequential extracted source number, src. <br/>
 - **lasPointSource**: (*or ~~lasSource~~?*)<br/>
-    - *sourceID* (PK): <br/>
+    - **sourceID** (Primary Key) : <br/>
         > UID (unique over entire WSA via programme ID prefix) of this merged detection as assigned by merge algorithm.
 
 #### Required Characteristics
-- ObjID:
+- Essential: ObjID, ra, dec, flux, etc.
+- Optional: x, y coord in frame
 
 #### Matching Surveys with TargetID
 ```SQL
 SELECT Main.masterObjID AS U_ObjID, slaveObjID AS W_ObjID
   FROM lasSourceXwise_allskysc AS Main
-  INNER JOIN ~~~ AS U
-  ON Main.masterObjID = U.~~~
+  INNER JOIN lasPointSource AS U
+  ON Main.masterObjID = U.sourceID
   INNER JOIN allwise_sc AS W
   ON Main.slaveObjID = W.cntr
 WHERE 
