@@ -35,9 +35,12 @@ Aim to create paired dataset with UKIDSS and WISE image.
 
 #### Main Table
 - **lasSourceXwise_allskysc**: <br/>
-Mainly used table, consisting of 2 columns <br/>
     - *masterObjID*: The unique ID in lasSource (=sourceID)
     - *slaveObjID*: The unique ID of the neighbour in WISE..wise_allskysc (=cntr)
+
+#### Merged Table
+- **allwise_sc**: <br/>
+    - *mObjID*: (=sourceID)
 
 #### Required Characteristics
 - ObjID:
