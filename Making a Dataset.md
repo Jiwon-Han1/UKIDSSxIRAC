@@ -78,3 +78,4 @@ SELECT TOP 50 Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.d
   ON Main.slaveObjID = W.cntr
 WHERE ~~~~~~
 ```
+Without constaints, the Query returned 55063366 result rows, which is same as the number of rows in lasSourceXwise_allskysc.
