@@ -31,7 +31,7 @@ Aim to create paired dataset with UKIDSS and WISE image.
   Contains the parameters provided for each source in the WISE allsky catalogue. (DR 2012)<br/>
   *> WISE/Tables/wise_allskysc* <br/><br/>
 
-### 1.3. Constructing SQL Queries
+### 1.3. Constructing SQL Queries (in UKIDSS Data Access)
 
 #### Main Table
 - **lasSourceXwise_allskysc**: <br/>
@@ -67,15 +67,33 @@ Aim to create paired dataset with UKIDSS and WISE image.
 - Position & Nearby Source:
 
 #### Matching Surveys with TargetID
+Without constaints, the following query returned 55,063,366 result rows, which is same as the number of rows in *lasSourceXwise_allskysc*.
 ```SQL
 SELECT TOP 50 Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec, W.ra, W.dec,
        U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err, 
        W.w1mag, W.w1sigm, W.w2mag, W.w2sigm, W.w3mag, W.w3sigm, W.w4mag, W.w4sigm
   FROM lasSourceXwise_allskysc AS Main
-  INNER JOIN lasPointSource AS U
-  ON Main.masterObjID = U.sourceID
-  INNER JOIN wise_allskysc AS W
-  ON Main.slaveObjID = W.cntr
-WHERE ~~~~~~
+       INNER JOIN lasPointSource AS U
+       ON Main.masterObjID = U.sourceID
+       INNER JOIN wise_allskysc AS W
+       ON Main.slaveObjID = W.cntr
 ```
-Without constaints, the Query returned 55063366 result rows, which is same as the number of rows in lasSourceXwise_allskysc.
+#### &rarr; However, it was impossible to load *wise_allskysc*. <br/> <br/>
+
+### 1.4. Alternative Approach: Merging Tables
+Instead of getting a target list at once on the UKIDSS data archive, we decided to merge the tables which are obtained from ~~~
+
+#### (1) UKIDSS LAS Table
+- Add spatial and brightness constraints considering the pixel scale of WISE survey. <br/>
+
+```SQL
+SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
+       U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err
+  FROM lasSourceXwise_allskysc AS Main
+       INNER JOIN lasPointSource AS U
+       ON Main.masterObjID = U.sourceID
+ WHERE U.kAperMag3 < 
+```
+
+<img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
+
