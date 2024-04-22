@@ -84,7 +84,25 @@ SELECT TOP 50 Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.d
 Instead of getting a target list at once on the UKIDSS data archive, we decided to merge the tables which are obtained from ~~~
 
 #### (1) UKIDSS LAS Table
-- Add spatial and brightness constraints considering the pixel scale of WISE survey. <br/>
+- Add spatial and brightness constraints considering the CrossID result.
+  - **Spatial Constraints**: TBD
+  - **Brightness**: 0 < kAperMag3 < 18.5 <br/>
+
+  ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a1d78d9e-a9e4-4ece-b384-bc47f323d9d3)
+  &rarr; When checking the result of CrossID at RA=180[deg] and Dec=0[deg] with in 1[arcmin] x 1[arcmin], for example, the 32 sources were detected in all filter bands and the upper limit of kAperMag3 was +18.5[mag].
+<br/>
+
+#### (2) Considering Pixel Scale
+- Decide the image size considering the pixels scale of UKIDSS and Wise survey.
+  - UKIDSS : ~ 0.4"/pix
+  - WISE  :   ~ 6.2"/pix
+- Maximum Image Extraction Radius
+  - UKIDSS : 15 [arcmin]
+  - WISE: No Limits (maybe)
+- Searching Radius and Image Size
+  - 1[arcmin] x 1[arcmin] &rarr; WISE Image Size: ~ 10x10
+  - 5[arcmin] x 5[arcmin] &rarr; WISE Image Size: ~ 50x50
+  - **10[arcmin] x 10[arcmin] &rarr; WISE Image Size: ~ 100x100**
 
 ```SQL
 SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
@@ -92,8 +110,14 @@ SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
   FROM lasSourceXwise_allskysc AS Main
        INNER JOIN lasPointSource AS U
        ON Main.masterObjID = U.sourceID
- WHERE U.kAperMag3 < 
+ WHERE U.kAperMag3 BETWEEN 0 AND 18.5
+       -- (Optional): Detected Source List within 10'x10' range
+       -- AND U.ra BETWEEN 180-0.083 AND 180+0.083 
+       -- AND U.dec BETWEEN 0-0.083 AND 0+0.083
 ```
 
+
+
+<br/><br/><br/><br/><br/><br/><br/>
 <img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
 
