@@ -18,7 +18,7 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
   - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
   - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
 
-#### (2) Things to keep in mind
+#### (2) Things to keep in mind - UKIDSS
 - All images at RA=180, Dec=0 are cropped in the result of GetImage; It seems necessary to confirm the exact survey area of LAS.
 - **Not all observation results were generated at the presented image size.**
 - The following image shows the K-band observation results at RA=180, Dec=10.<br/>
@@ -26,20 +26,25 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
 <br/>
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
-<br/><br/>
+<br/>
+#### (3) Things to keep in mind - WISE
+- The number of targets available for all filter bands.
+<img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
+<br/>
+<br/>
 
 ### 1.2 Image Search
 Extract the image at the given point with the specified search radius.
 
 #### (1) UKIDSS
 - GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
-- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp>
-<<img width="681" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/7a8d2eb8-b252-4ed3-a5fd-d6d4a6c76438">
+- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp><br/>
+<img width="681" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/7a8d2eb8-b252-4ed3-a5fd-d6d4a6c76438">
 
 
 #### (2) WISE
 - Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
-<<img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
+<img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
 <br/>
 
 
@@ -50,7 +55,7 @@ Extract the image at the given point with the specified search radius.
 
 
 <br/><br/><br/><br/><br/><br/><br/>
-<img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
+
 
 
 
