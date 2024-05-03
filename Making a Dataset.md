@@ -1,14 +1,68 @@
 # UKIDSS x WISE: Creating a Paired Dataset  
 Aim to create paired dataset with UKIDSS and WISE image. 
 <br/><br/>
-## 1. Making a Targetlist
+## 1. Getting Image at Data Archive
 
-### 1.1. Check Tables
+### 1.1 Image Size
+Decide the image size considering the pixels scale of UKIDSS and Wise survey.
+
+#### (1) Considering Pixel Scale and Search Radius
+- Pixel Scale
+  - UKIDSS : ~ 0.4"/pix
+  - WISE  :   ~ 1.375"/pix
+- Maximum Image Extraction Radius
+  - UKIDSS : 15 [arcmin]
+  - WISE: No Limits (maybe)
+- Searching Radius and Image Size
+  - 1[arcmin] x 1[arcmin] &rarr; UKIDSS Image Size: ~ 150x150 / WISE Image Size: ~ 44x44
+  - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
+  - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
+
+#### (2) Things to keep in mind
+- All images at RA=180, Dec=0 are cropped in the result of GetImage; It seems necessary to confirm the exact survey area of LAS.
+- **Not all observation results were generated at the presented image size.**
+- The following image shows the K-band observation results at RA=180, Dec=10.<br/>
+
+![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
+<br/>
+<img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
+<br/><br/>
+
+### 1.2 Image Search
+Extract the image at the given point with the specified search radius.
+
+#### (1) UKIDSS
+- GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
+- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp>
+
+#### (2) WISE
+- Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
+
+<img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
+<br/>
+
+
+
+
+
+
+
+<br/><br/><br/><br/><br/><br/><br/>
+<img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
+
+
+
+
+
+
+## 2. Making a Targetlist
+
+### 2.1. Check Tables
 * Table Description: <http://wsa.roe.ac.uk/www/wsa_browser.html>
 * Description for WISE Source Catalog: <https://wise2.ipac.caltech.edu/docs/release/prelim/expsup/sec1_4b.html>
 <br/><br/>
 
-### 1.2. Choose Table Candidates
+### 2.2. Choose Table Candidates
 
 #### UKIDSS<br/>
 * lasMergeLog: <br/>
@@ -31,7 +85,7 @@ Aim to create paired dataset with UKIDSS and WISE image.
   Contains the parameters provided for each source in the WISE allsky catalogue. (DR 2012)<br/>
   *> WISE/Tables/wise_allskysc* <br/><br/>
 
-### 1.3. Constructing SQL Queries (in UKIDSS Data Access)
+### 2.3. Constructing SQL Queries (in UKIDSS Data Access)
 
 #### Main Table
 - **lasSourceXwise_allskysc**: <br/>
@@ -80,7 +134,7 @@ SELECT TOP 50 Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.d
 ```
 #### &rarr; However, it was impossible to load *wise_allskysc*. <br/> <br/>
 
-### 1.4. Alternative Approach: Merging Tables
+### 2.4. Alternative Approach: Merging Tables
 Instead of getting a target list at once on the UKIDSS data archive, we decided to merge the tables which are obtained from ~~~
 
 #### (1) UKIDSS LAS Table
@@ -103,53 +157,4 @@ SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
        -- AND U.dec BETWEEN 0-0.083 AND 0+0.083
 ```
 <br/><br/><br/><br/>
-
-## 2. Getting Image at Data Archive
-
-### 2.1 Image Size
-Decide the image size considering the pixels scale of UKIDSS and Wise survey.
-
-#### (1) Considering Pixel Scale and Search Radius
-- Pixel Scale
-  - UKIDSS : ~ 0.4"/pix
-  - WISE  :   ~ 1.375"/pix
-- Maximum Image Extraction Radius
-  - UKIDSS : 15 [arcmin]
-  - WISE: No Limits (maybe)
-- Searching Radius and Image Size
-  - 1[arcmin] x 1[arcmin] &rarr; UKIDSS Image Size: ~ 150x150 / WISE Image Size: ~ 44x44
-  - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
-  - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
-
-#### (2) Things to keep in mind
-- All images at RA=180, Dec=0 are cropped in the result of GetImage; It seems necessary to confirm the exact survey area of LAS.
-- **Not all observation results were generated at the presented image size.**
-- The following image shows the K-band observation results at RA=180, Dec=10.<br/>
-
-![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
-<br/>
-<img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
-<br/><br/>
-
-### 2.2 Image Search
-Extract the image at the given point with the specified search radius.
-
-#### (1) UKIDSS
-- GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
-- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp>
-
-#### (2) WISE
-- Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
-
-<img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
-<br/>
-
-
-
-
-
-
-
-<br/><br/><br/><br/><br/><br/><br/>
-<img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
 
