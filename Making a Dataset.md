@@ -129,9 +129,17 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
 <br/>
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
-<br/>
+<br/><br/>
 
-### 2.2 Getting Image
+### 2.2 Image Search
+Extract the image at the given point with the specified search radius.
+
+#### (1) UKIDSS
+- GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
+- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp>
+
+#### (2) WISE
+- Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
 
 <img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
 <br/>
