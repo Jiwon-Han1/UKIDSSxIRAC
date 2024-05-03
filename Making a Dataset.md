@@ -38,12 +38,12 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 Extract the image at the given point with the specified search radius.
 
 #### (1) UKIDSS
-- GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
+- [GetImage](http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp)
 <img width="681" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/7a8d2eb8-b252-4ed3-a5fd-d6d4a6c76438">
 
 
 #### (2) WISE
-- Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
+- [Search by Position](https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&)
 <img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
 <br/>
 
@@ -51,13 +51,13 @@ Extract the image at the given point with the specified search radius.
 
 #### (1) Check the Required Format
 - **UKIDSS**
-  - [MultiGetImage][http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp]<br/>
+  - [MultiGetImage](http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp)<br/>
   - Supply a **.txt** file of coordinates (J2000) either in decimal degrees or sexagesimal, which are separated by spaces or commas.
   - Example: <http://wsa.roe.ac.uk/examples/las.txt>  
   - <img width="241" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/cf559cca-2acb-4b06-b8de-751fada2139f">
 
 - **WISE**
-  - [Search by Position (Multi-Object)][https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&]
+  - [Search by Position (Multi-Object)](https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&)
   - The file must be in **IPAC table file** format, which is ASCII text with headers explaining the type of data in each column, separated by vertical bars.
   - Detailed guide: <https://irsa.ipac.caltech.edu/onlinehelp/wise/#id=searching.byTable>
   - <img width="293" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/420b630a-e848-4dce-86a7-a54a1e8a10d4">
