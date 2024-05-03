@@ -65,8 +65,30 @@ Extract the image at the given point with the specified search radius.
 
 #### (2) Create the Coordinate File
 - **UKIDSS**
+- **WISE**
 ```Python3
+import numpy as np
 
+arcmin, arcsec = 1/60., 1/3600.
+RA, Dec = 180.0, 0.0    # deg
+
+offset = 6*arcmin
+range = 5.0 # deg
+
+RA_arr = np.arange(RA-range, RA+range+offset, offset)
+Dec_arr = np.arange(Dec-range, Dec+range+offset, offset)
+
+RA_mesh, Dec_mesh = np.meshgrid(RA_arr, Dec_arr)    # n x n
+RA_flat, Dec_flat = RA_mesh.flatten(), Dec_mesh.flatten()   # n^2 x 1
+
+with open("coord_{:.2f}_deg_sample.tbl".format(offset), 'w') as file:
+    file.write("|              ra|              dec|\n")
+    file.write("|          double|           double|\n")
+    file.write("|             deg|              deg|\n")
+    for RA, Dec in zip(RA_flat[0:2], Dec_flat[0:2]):
+        file.write(" {:.1f}            {:.1f}\n".format(RA, Dec))
+
+print("CSV file 'coord.dat' has been created successfully.")
 
 ```
 
