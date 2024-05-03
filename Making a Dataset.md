@@ -90,11 +90,23 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
 
   ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a1d78d9e-a9e4-4ece-b384-bc47f323d9d3)
   &rarr; When checking the result of CrossID at RA=180[deg] and Dec=0[deg] with in 1[arcmin] x 1[arcmin], for example, the 32 sources were detected in all filter bands and the upper limit of kAperMag3 was +18.5[mag].
+
+```SQL
+SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
+       U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err
+  FROM lasSourceXwise_allskysc AS Main
+       INNER JOIN lasPointSource AS U
+       ON Main.masterObjID = U.sourceID
+ WHERE U.kAperMag3 BETWEEN 0 AND 18.5
+       -- (Optional): Detected Source List within 10'x10' range
+       -- AND U.ra BETWEEN 180-0.083 AND 180+0.083 
+       -- AND U.dec BETWEEN 0-0.083 AND 0+0.083
+```
 <br/><br/><br/><br/>
 
 ## 2. Getting Image at Data Archive
 
-### 1.1 Image Size
+### 2.1 Image Size
 Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 
 #### (1) Considering Pixel Scale and Search Radius
@@ -117,25 +129,16 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
 <br/>
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
-<br/><br/><br/>
+<br/>
 
-#### (3) WISE
+### 2.2 Getting Image
+
 <img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
 <br/>
 
 
 
-```SQL
-SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
-       U.yAperMag3, U.yAperMag3Err, U.jAperMag3, U.jAperMag3Err, U.hAperMag3, U.hAperMag3Err, U.kAperMag3, U.kAperMag3Err
-  FROM lasSourceXwise_allskysc AS Main
-       INNER JOIN lasPointSource AS U
-       ON Main.masterObjID = U.sourceID
- WHERE U.kAperMag3 BETWEEN 0 AND 18.5
-       -- (Optional): Detected Source List within 10'x10' range
-       -- AND U.ra BETWEEN 180-0.083 AND 180+0.083 
-       -- AND U.dec BETWEEN 0-0.083 AND 0+0.083
-```
+
 
 
 
