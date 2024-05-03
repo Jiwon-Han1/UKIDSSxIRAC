@@ -11,14 +11,14 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
   - UKIDSS : ~ 0.4"/pix
   - WISE  :   ~ 1.375"/pix
 - Maximum Image Extraction Radius
-  - UKIDSS : 15 [arcmin]
+  - UKIDSS : 15 [arcmin] (12 [arcmin] for MultiGetImage)
   - WISE: No Limits (maybe)
 - Searching Radius and Image Size
   - 1[arcmin] x 1[arcmin] &rarr; UKIDSS Image Size: ~ 150x150 / WISE Image Size: ~ 44x44
   - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
   - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
 
-#### (2) Things to keep in mind - UKIDSS
+#### (2) Things to Keep in Mind - UKIDSS
 - All images at RA=180, Dec=0 are cropped in the result of GetImage; It seems necessary to confirm the exact survey area of LAS.
 - **Not all observation results were generated at the presented image size.**
 - The following image shows the K-band observation results at RA=180, Dec=10.<br/>
@@ -27,19 +27,18 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 <br/>
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
 <br/>
-#### (3) Things to keep in mind - WISE
+#### (3) Things to Keep in Mind - WISE
 - Following image shows the number of targets available for all filter bands.
 - Decide the filter combination considering the required wavelength.
 <img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
 <br/>
 <br/>
 
-### 1.2 Image Search
+### 1.2 Image Search (Singe Image)
 Extract the image at the given point with the specified search radius.
 
 #### (1) UKIDSS
 - GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
-- MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp><br/>
 <img width="681" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/7a8d2eb8-b252-4ed3-a5fd-d6d4a6c76438">
 
 
@@ -48,9 +47,22 @@ Extract the image at the given point with the specified search radius.
 <img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
 <br/>
 
+### 1.3 Making a Coordinate List
 
+#### (1) Check the Required Format
+- **UKIDSS**
+  - MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp><br/>
+  - Supply a **.txt** file of coordinates (J2000) either in decimal degrees or sexagesimal, which are separated by spaces or commas.
+  - Example: <http://wsa.roe.ac.uk/examples/las.txt>  
+  - <img width="241" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/cf559cca-2acb-4b06-b8de-751fada2139f">
 
+- **WISE**
+  - Search by Position (Multi-Object): <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
+  - The file must be in **IPAC table file** format, which is ASCII text with headers explaining the type of data in each column, separated by vertical bars.
+  - Detailed guide: <https://irsa.ipac.caltech.edu/onlinehelp/wise/#id=searching.byTable>
+  - <img width="293" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/420b630a-e848-4dce-86a7-a54a1e8a10d4">
 
+#### (2) Create the Coordinate File
 
 
 
