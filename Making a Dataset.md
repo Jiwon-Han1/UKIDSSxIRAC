@@ -90,9 +90,11 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
 
   ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a1d78d9e-a9e4-4ece-b384-bc47f323d9d3)
   &rarr; When checking the result of CrossID at RA=180[deg] and Dec=0[deg] with in 1[arcmin] x 1[arcmin], for example, the 32 sources were detected in all filter bands and the upper limit of kAperMag3 was +18.5[mag].
-<br/>
 
-#### (2) Considering Pixel Scale
+### 1.5. Getting Image at Data Archive
+A~~~
+
+#### (1) Considering Pixel Scale
 - Decide the image size considering the pixels scale of UKIDSS and Wise survey.
   - UKIDSS : ~ 0.4"/pix
   - WISE  :   ~ 6.2"/pix
@@ -101,8 +103,23 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
   - WISE: No Limits (maybe)
 - Searching Radius and Image Size
   - 1[arcmin] x 1[arcmin] &rarr; WISE Image Size: ~ 10x10
-  - 5[arcmin] x 5[arcmin] &rarr; WISE Image Size: ~ 50x50
-  - **10[arcmin] x 10[arcmin] &rarr; WISE Image Size: ~ 100x100**
+  - **5[arcmin] x 5[arcmin] &rarr; WISE Image Size: ~ 50x50**
+  - 10[arcmin] x 10[arcmin] &rarr; WISE Image Size: ~ 100x100
+
+&rarr; All images at RA=180, Dec=0 are cropped in the result of GetImage. It seems necessary to confirm the exact survey area of LAS. <br/><br/>
+&rarr; **Not all observation results were generated at the presented image size.** The following image shows the K-band observation results at RA=180, Dec=10.<br/>
+
+![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
+<br/>
+<img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
+<br/><br/><br/>
+
+
+#### (1) UKIDSS LAS Table
+<img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
+<br/>
+
+
 
 ```SQL
 SELECT Main.masterObjID AS U_ObjID, Main.slaveObjID AS W_ObjID, U.ra, U.dec,
