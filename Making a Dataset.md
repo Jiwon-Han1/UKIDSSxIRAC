@@ -94,8 +94,11 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
 
 ## 2. Getting Image at Data Archive
 
-### 1.1 Considering Pixel Scale
-- Decide the image size considering the pixels scale of UKIDSS and Wise survey.
+### 1.1 Image Size
+Decide the image size considering the pixels scale of UKIDSS and Wise survey.
+
+#### (1) Considering Pixel Scale and Search Radius
+- Pixel Scale
   - UKIDSS : ~ 0.4"/pix
   - WISE  :   ~ 1.375"/pix
 - Maximum Image Extraction Radius
@@ -106,16 +109,17 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
   - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
   - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
 
-&rarr; All images at RA=180, Dec=0 are cropped in the result of GetImage. It seems necessary to confirm the exact survey area of LAS. <br/><br/>
-&rarr; **Not all observation results were generated at the presented image size.** The following image shows the K-band observation results at RA=180, Dec=10.<br/>
+#### (2) Things to keep in mind
+- All images at RA=180, Dec=0 are cropped in the result of GetImage; It seems necessary to confirm the exact survey area of LAS.
+- **Not all observation results were generated at the presented image size.**
+- The following image shows the K-band observation results at RA=180, Dec=10.<br/>
 
 ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/163123bf-77ca-41a5-80fd-4fcf78ae4e14)
 <br/>
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
 <br/><br/><br/>
 
-
-#### (1) UKIDSS LAS Table
+#### (3) WISE
 <img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
 <br/>
 
