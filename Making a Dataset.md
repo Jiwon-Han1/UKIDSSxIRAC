@@ -90,21 +90,21 @@ Instead of getting a target list at once on the UKIDSS data archive, we decided 
 
   ![image](https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a1d78d9e-a9e4-4ece-b384-bc47f323d9d3)
   &rarr; When checking the result of CrossID at RA=180[deg] and Dec=0[deg] with in 1[arcmin] x 1[arcmin], for example, the 32 sources were detected in all filter bands and the upper limit of kAperMag3 was +18.5[mag].
+<br/><br/><br/><br/>
 
-### 1.5. Getting Image at Data Archive
-A~~~
+## 2. Getting Image at Data Archive
 
-#### (1) Considering Pixel Scale
+### 1.1 Considering Pixel Scale
 - Decide the image size considering the pixels scale of UKIDSS and Wise survey.
   - UKIDSS : ~ 0.4"/pix
-  - WISE  :   ~ 6.2"/pix
+  - WISE  :   ~ 1.375"/pix
 - Maximum Image Extraction Radius
   - UKIDSS : 15 [arcmin]
   - WISE: No Limits (maybe)
 - Searching Radius and Image Size
-  - 1[arcmin] x 1[arcmin] &rarr; WISE Image Size: ~ 10x10
-  - **5[arcmin] x 5[arcmin] &rarr; WISE Image Size: ~ 50x50**
-  - 10[arcmin] x 10[arcmin] &rarr; WISE Image Size: ~ 100x100
+  - 1[arcmin] x 1[arcmin] &rarr; UKIDSS Image Size: ~ 150x150 / WISE Image Size: ~ 44x44
+  - **5[arcmin] x 5[arcmin] &rarr; UKIDSS Image Size: ~ 750x750 / WISE Image Size: ~ 220x220**
+  - 10[arcmin] x 10[arcmin] &rarr; UKIDSS Image Size: ~ 1500x1500 / WISE Image Size: ~ 440x440
 
 &rarr; All images at RA=180, Dec=0 are cropped in the result of GetImage. It seems necessary to confirm the exact survey area of LAS. <br/><br/>
 &rarr; **Not all observation results were generated at the presented image size.** The following image shows the K-band observation results at RA=180, Dec=10.<br/>
