@@ -1,7 +1,7 @@
 # UKIDSS x WISE: Creating a Paired Dataset  
 Aim to create paired dataset with UKIDSS and WISE image. 
 <br/><br/>
-## 1. Getting Image at Data Archive
+## 1. Getting an Image at Data Archive
 
 ### 1.1 Image Size
 Decide the image size considering the pixels scale of UKIDSS and Wise survey.
@@ -34,12 +34,14 @@ Extract the image at the given point with the specified search radius.
 #### (1) UKIDSS
 - GetImage: <http://wsa.roe.ac.uk:8080/wsa/getImage_form.jsp>
 - MultiGetImage: <http://wsa.roe.ac.uk:8080/wsa/MultiGetImage_form.jsp>
+<<img width="681" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/7a8d2eb8-b252-4ed3-a5fd-d6d4a6c76438">
+
 
 #### (2) WISE
 - Search by Position: <https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&>
-
-<img width="699" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/a0c59da3-da78-4afd-ba37-e96f8807afda">
+<<img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
 <br/>
+
 
 
 
