@@ -46,6 +46,7 @@ Extract the image at the given point with the specified search radius.
 - [Search by Position](https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&)
 <img width="696" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/396148e8-9947-43fc-bf41-2e7aa39f90e6">
 <br/>
+<br/>
 
 ### 1.3 Making a Coordinate List
 
@@ -58,7 +59,7 @@ Extract the image at the given point with the specified search radius.
 
 - **WISE**
   - [Search by Position (Multi-Object)](https://irsa.ipac.caltech.edu/applications/wise/?__action=layout.showDropDown&)
-  - The file must be in **IPAC table file** format, which is ASCII text with headers explaining the type of data in each column, separated by vertical bars.
+  - Submit the **IPAC table file**, which is ASCII text with headers explaining the type of data in each column, separated by vertical bars.
   - Detailed guide: <https://irsa.ipac.caltech.edu/onlinehelp/wise/#id=searching.byTable>
   - <img width="293" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/420b630a-e848-4dce-86a7-a54a1e8a10d4">
 
