@@ -28,7 +28,8 @@ Decide the image size considering the pixels scale of UKIDSS and Wise survey.
 <img width="1384" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/47f16136-c211-4b1d-965d-982ed5060400">
 <br/>
 #### (3) Things to keep in mind - WISE
-- The number of targets available for all filter bands.
+- Following image shows the number of targets available for all filter bands.
+- Decide the filter combination considering the required wavelength.
 <img width="610" alt="image" src="https://github.com/Jiwon-Han1/UKIDSSxWISE/assets/147721921/97d5e50f-c2b7-4939-9db2-97d7d2afd4d7">
 <br/>
 <br/>
