@@ -1,4 +1,4 @@
-### Saved as ~/UKIDSSxIRAC/prep_fits_to_npy.py
+### Saved as ~/UKIDSSxIRAC/0_prep_fits_to_npy.py
 import numpy as np
 import matplotlib.pyplot as plt
 import os, time, glob, copy
