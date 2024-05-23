@@ -1,4 +1,4 @@
-### Saved as ~/UKIDSSxIRAC/1_prep_data_augmentation.py
+### Saved as ~/UKIDSSxIRAC/1_prep_stacking_and_augmentation.py
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
