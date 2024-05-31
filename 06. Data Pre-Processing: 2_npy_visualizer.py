@@ -1,3 +1,4 @@
+### Saved as ~/UKIDSSxIRAC/2_npy_visualizer.py
 import numpy as np
 import matplotlib.pyplot as plt
 import os, time, glob, copy
