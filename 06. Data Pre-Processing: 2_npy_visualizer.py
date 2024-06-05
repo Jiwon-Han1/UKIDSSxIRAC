@@ -13,15 +13,20 @@ filters1 = ['J', 'H', 'K']
 survey2 = 'spitzer'
 filters2 = ['ch1', 'ch2', 'ch3', 'ch4']
 
+targetlist = np.loadtxt(os.path.join(root_dir, 'targetlist.txt'), dtype='str')
+
 train_ratio = 0.6
 val_ratio = 0.2
 test_ratio = 0.2
 
-augmentation = ['VF', 'HF', 'Rot90', 'Rot180', 'Rot270']
+augmentation = ['VF', 'HF', 'Rot90', 'Rot180', 'Rot270', 'VF_Rot90', 'HF_Rot90']
+
+verbose_fits_to_npy = False
+verbose_image_stacking = True
+verbose_augmentation = False
+
 
 # --------------------------------------------------------------- #
-
-targetlist = np.loadtxt(os.path.join(root_dir, 'targetlist.txt'), dtype='str')
 
 class Visualizer:
     def __init__(self):
@@ -41,7 +46,7 @@ class Visualizer:
     def log_transform(self, image):
         return np.log1p(image)  # log(1 + image) to avoid log(0) issues
 
-    def visualize_npy_files(self, filename):
+    def visualize_npy_files(self, filename, channel_name):
         image = np.load(filename)
         image = self.normalize_image(image)
         image = self.log_transform(image)  
@@ -64,7 +69,6 @@ class Visualizer:
             plt.title(f'{channel_name[0]}')
         
         plt.show()
-
 
 data_dir = root_dir+'/data/merged'
 channel_name_X = ['J', 'H', 'K', 'ch2', 'ch3', 'ch4']
