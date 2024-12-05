@@ -31,22 +31,73 @@ class FitsRegistrationManager:
         reprojected_image, _ = reproject.reproject_interp(data_file[data_num], ref_header)
         return reprojected_image, org_data_header, ref_header
     
-    def update_header(self, reprojected_image, org_data_header, ref_header, update_keys=None, verbose=False):
+    def update_header(self, reprojected_image, org_data_header, ref_header, 
+                      additional_keys=None, verbose=False):
         if verbose:
-            ref_header
-        if update_keys is None:
-            update_keys = ['CTYPE1', 'CTYPE2', 'CRVAL1', 'CRVAL2', 'CRPIX1', 'CRPIX2', 'CD1_1', 'CD1_2', 'CD2_1', 'CD2_2']
-        
-        # Update information to match the reprojected image
+            print("Updating header...")
+
+        # Update information based on a copy of original header
         new_header = copy.deepcopy(org_data_header)
+
+        # Update WCS keys from ref_header
+        update_keys = [
+                'CTYPE1', 'CTYPE2', 'CRVAL1', 'CRVAL2',  # WCS-related keys
+                'CRPIX1', 'CRPIX2', 'CD1_1', 'CD1_2', 'CD2_1', 'CD2_2'  # Projection matrix
+            ]
         for key in update_keys:
             if key in ref_header:
                 new_header[key] = ref_header[key]
+            else:
+                print(f"Key {key} not found in ref_header. Skipping.")
+        
+        # Update the image dimensions
         new_header['NAXIS'] = 2
         new_header['NAXIS1'] = reprojected_image.shape[1]  # Width of the image
         new_header['NAXIS2'] = reprojected_image.shape[0]  # Height of the image
+
+        # Update EQUINOX and RADESYS if necessary
+        if 'EQUINOX' in ref_header:
+            new_header['EQUINOX'] = ref_header['EQUINOX']  # Ensure the coordinate system is consistent
+        else:
+            print("EQUINOX key missing in ref_header.")
+        if 'RADESYS' in ref_header:
+            new_header['RADESYS'] = ref_header['RADESYS']  # Match the reference coordinate system
+        else:
+            print("RADESYS key missing in ref_header.")
+
+        # Dynamically add specific keys from the original header if they exist
+        if additional_keys is None:
+            additional_keys = ['EXPTIME', 'DATE-OBS', 'DATE_OBS']
+        for key in additional_keys:
+            if key in org_data_header:
+                new_header[key] = org_data_header[key]
+            else:
+                if verbose:
+                    print(f"Key {key} not found in org_data_header. Skipping.")
+                        
+        # Preserve specific keys from the original header that are critical
+        preserve_keys = ['TELESCOP', 'INSTRUME', 'BUNIT']  # Instrument-related metadata
+        for key in preserve_keys:
+            if key in org_data_header:
+                new_header[key] = org_data_header[key]
+            else:
+                if verbose:
+                    print(f"Key {key} not found in org_data_header.")
+        if 'FILTER' in org_data_header:
+            new_header['FILTER'] = org_data_header['FILTER']
+        elif 'CHNLNUM' in org_data_header:
+            new_header['FILTER'] = 'CH'+str(org_data_header['CHNLNUM'])
+        else:
+            if verbose:
+                print("FILTER and CHNLNUM keys missing in org_data_header.")
+        
+        # Add comments and history
         new_header['COMMENT'] = "Reprojected to match the VVV coordinate system."
-        new_header['HISTORY'] = "Image reprojected using astropy.reproject."
+        new_header['HISTORY'] = "Reprojection performed using astropy.reproject."
+
+        if verbose:
+            print("Header updated.")
+            print(new_header)
         return new_header
     
     def save_as_npy(self, reprojected_image, save_name, verbose=False):#, filename, ref_header_filename):
